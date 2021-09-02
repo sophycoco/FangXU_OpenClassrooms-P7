@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+/*const mysql = require('mysql');
 require('dotenv').config();
 
 const conn = mysql.createConnection({
@@ -19,4 +19,13 @@ conn.connect(
         }
     });
 
-module.exports = conn;
+module.exports = conn;*/
+
+module.exports = (req, res, next) => {
+try {
+  await sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+};
