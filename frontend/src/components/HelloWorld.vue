@@ -34,7 +34,7 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
   }
 }
 </script>
@@ -53,6 +53,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #e55252cb;
 }
 </style>

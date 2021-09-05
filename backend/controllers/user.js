@@ -16,7 +16,7 @@ exports.signup = (req, res, next) => {
       user
         .create(user)
         /* .save()*/
-        .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
+        .then(() => res.status(201).json({ message: "Your account has been created " }))
         .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
@@ -54,7 +54,7 @@ exports.login = (req, res, next) => {
         .compare(req.body.password, user.password)
         .then((valid) => {
           if (!valid) {
-            return res.status(401).json({ error: "Mot de passe incorrect !" });
+            return res.status(401).json({ error: "Incorrect password" });
           }
           res.status(200).json({
             userId: user._id,
@@ -69,6 +69,6 @@ exports.login = (req, res, next) => {
 // to delete an account
 exports.delete = (req, res, next) => {
   User.deleteOne({ email: req.body.email })
-    .then(() => res.status(200).json({ message: "the account is deleted" }))
+    .then(() => res.status(200).json({ message: "The account is deleted" }))
     .catch((error) => res.status(400).json({ error }));
 };
