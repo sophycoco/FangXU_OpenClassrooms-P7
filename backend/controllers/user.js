@@ -1,21 +1,25 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user");
 
 // to create a new user
 exports.signup = (req, res, next) => {
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
+  /*bcrypt
+    .hash(req.body.password, 10)*/
+    const email = req.body.email;
+    const password = req.body.password;
+    const username = req.body.username;
+    User.findOne({ where: {email: email }})
+    .then((userFind) => {
       const user = new User({
-        email: req.body.email,
-        password: hash,
-        username: req.body.username,
+        email: email,
+        password: password,
+        username: username,
         /*imageUrl: req.body.image, */
       });
       user
-        .create(user)
-        /* .save()*/
+       /* .create(user)*/
+        .save()
         .then(() => res.status(201).json({ message: "Your account has been created " }))
         .catch((error) => res.status(400).json({ error }));
     })
