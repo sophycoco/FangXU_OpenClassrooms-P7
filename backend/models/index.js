@@ -1,4 +1,4 @@
-const dbConfig = require("../config/db.config.js");
+/*const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize({
    username : dbConfig.USER, 
@@ -20,3 +20,4 @@ db.sequelize = sequelize;
 db.users = require("./user.js")(sequelize, Sequelize);
 db.posts = require("./post.js")(sequelize, Sequelize);
 module.exports = db;
+*/

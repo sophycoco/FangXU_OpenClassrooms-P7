@@ -1,26 +1,25 @@
-/*const mysql = require('mysql');
+const mysql = require('mysql2');
 require('dotenv').config();
 
 const conn = mysql.createConnection({
-  host : process.env.DB_HOST,
-// TBC
-  user : 'me',
-  password : 'secret',
-  database : 'groupomania'
+  host: process.env.DB_LOCALHOST,
+  user: process.env.DB_IDENTIFIANT,
+  password: process.env.DB_PASSWORD,
+  database: 'groupomania'
 });
 
 conn.connect(
     function(err) {
         if (err) {
-            console.log('error connecting: ' + err.stack);
+            console.log('Unable to connect to the database:', error);
             throw err;
         } else {
-            console.log("Connected ! ");
+            console.log("Connection has been established successfully.");
         }
     });
 
-module.exports = conn;*/
-
+module.exports = conn;
+/*
 module.exports = (req, res, next) => {
 try {
   await sequelize.authenticate();
@@ -28,4 +27,4 @@ try {
 } catch (error) {
   console.error('Unable to connect to the database:', error);
 }
-};
+};*/

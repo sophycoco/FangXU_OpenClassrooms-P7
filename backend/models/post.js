@@ -1,22 +1,4 @@
-/*const mongoose = require('mongoose');
-
-const sauceSchema = mongoose.Schema({
-    userId: { type: String, require: true },
-    name: { type: String, required: true },
-    manufacturer: { type: String, require: true },
-    description: { type: String, require: true },
-    mainPeper: { type: String, require: true },
-    imageUrl: { type: String, require: true },
-    heat: { type: Number, require: true },
-    likes: { type: Number, require: true },
-    dislikes: { type: Number, require: true },
-    usersLiked: { type: [String], require: true },
-    usersDislikes: { type: [String], require: true },
-});
-
-module.exports = mongoose.model('Sauce', sauceSchema);*/
-
-module.exports = (sequelize, Sequelize) => {
+/*module.exports = (sequelize, Sequelize) => {
     const Post = sequelize.define("post", {
       userID: {
         type: Sequelize.STRING, allowNull: false
@@ -36,13 +18,25 @@ module.exports = (sequelize, Sequelize) => {
       dislikes: {
         type: Sequelize.INTEGER, allowNull: false
       },
-      /*
+      
       userLiked: {
         type: [Sequelize.STRING], allowNull: false
       },
       userDisliked: {
         type: [Sequelize.STRING], allowNull: false
-      }*/
+      }
     });
     return Post;
-  };
+  };*/
+
+const mysql = require("mysql2");
+
+const Post = function (post) {
+  this.id = post.post_id;
+  this.content = post.content;
+  this.title = post.title;
+  this.image = post.image;
+  this.user_id = post.user_id;
+};
+
+module.exports = Post;
