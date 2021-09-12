@@ -1,19 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Signup</router-link> |
-      <router-link to="/about">Login</router-link>
-    </div> 
-<!-- 
     <header id="header">
       <img class="logo" alt="logo" src="../src/assets/logo.png" />
-    </header>-->
+    </header>
     <div id="conn-connected"></div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
-<style lang="scss">
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      conn: "",
+    };
+  },
+  created() {
+    axios
+      .get(this.$localhost + "api/")
+      .then((response) => (this.conn = response.data))
+      .catch((error) => {
+        console.log(error);
+        document.getElementById("conn-connected").innerHTML = "The database is not connected. ";
+      });
+  },
+};
+</script>
+
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,21 +40,33 @@
 
 #nav {
   padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #e55252cb;
-    }
-  }
 }
-
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+#nav a.router-link-exact-active {
+  color: #e55252cb;
+}
+.logo {
+  width: 50%;
+  text-align: right;
+}
+.navigation {
+  text-align: center;
+}
+.btn-primary {
+  background-color: #e55252cb;
+  font-weight: 600;
+}
 #conn-connected {
   text-align: center;
   font-size: 24px;
   color: #e55252cb;
 }
-
+@media (min-width: 1024px) {
+  .logo {
+    width: 20%;
+  }
+}
 </style>

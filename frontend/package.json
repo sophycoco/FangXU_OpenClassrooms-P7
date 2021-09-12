@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "proxy": "http://127.0.0.1:5000",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,9 +9,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
+    "@vue/cli-plugin-vuex": "^4.5.13",
+    "axios": "^0.21.4",
+    "core-js": "^3.17.3",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-jwt-decode": "^0.1.0",
+    "vue-router": "^3.2.0",
+    "vuelidate": "^0.7.6",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
