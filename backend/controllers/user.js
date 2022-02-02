@@ -65,29 +65,29 @@ exports.login = async(req, res, next) => {
                       } else {
                           //confirmation User connecté
                           console.log(req.body.email, "is connected. ");
-                          //on décris le niveau d'acces du membre
+                          //admin or not
                           if (results[0].isAdmin === 1) {
-                              status = 'administrateur';
+                              status = 'administrater';
                           } else {
-                              status = 'membre';
+                              status = 'member';
                           }
                           res.status(200).json({
                               userId: req.body.id,
                               email: req.body.email,
                               username: req.body.username,
                               isAdmin: results[0].isAdmin,
-                          token: jwt.sign({ userId: req.body.id }, process.env.TK_CHAIN, { expiresIn: '2h' })
+                          token: jwt.sign({ userId: req.body.id }, process.env.TK_CHAIN, { expiresIn: '24h' })
                           });
 
                       }
                   });
          /* } else {
-              res.status(401).json({ message: 'Utilisateur ou mot de passe inconnu' });
+              res.status(401).json({ message: 'User or password does not exist.' });
           }*/
       }
       });
   } else {
-      res.status(500).json({ message: "Entrez votre email et votre mot de passe" });
+      res.status(500).json({ message: "Please enter your email address and password. " });
   }
 };
 
@@ -97,18 +97,19 @@ exports.deleteUser = (req, res, next) => {
     .then(() => res.status(200).json({ message: "The account is deleted" }))
     .catch((error) => res.status(400).json({ error }));*/
   let user_id = req.params.id;
-  conn.query(`DELETE FROM user WHERE id = ?`, user_id, (error, result) => {
-    if (error) return res.status(400).json({ error: "The account has not been deleted. " });
+  conn.query(`DELETE FROM user WHERE id = ?`, user_id,  (error, result) => {
+    if (error) return res.status(400).json({ error: "The account cannot be deleted. " });
     return res.status(200).json(result);
   });
 };
 
+// to get informations of all users
 exports.getAllUser = (req, res, next) => {
   conn.query('SELECT id, username, email FROM user ', (error, result) => {
       if (error) {
           return res
               .status(400)
-              .json({ error: "impossible d'afficher les listes des membres" });
+              .json({ error: "impossible to get the member list. " });
       }
       return res.status(200).json(result);
   });
@@ -116,11 +117,11 @@ exports.getAllUser = (req, res, next) => {
 
 // to get information of one selected user
 exports.getOneUser = (req, res, next) => {
-  conn.query('SELECT * FROM user WHERE id =?', req.params.id, (error, result) => {
+  conn.query('SELECT id, username, email FROM user WHERE id =?', req.params.id, (error, result) => {
       if (error) {
           return res
               .status(400)
-              .json({ error: "Impossible d'afficher cet Utilisateur" });
+              .json({ error: "Impossible to find the user" });
       }
       return res.status(200).json(result);
   });
@@ -132,7 +133,7 @@ exports.modifyUser = (req, res, next) => {
   const id = req.params.id;
   let password = req.body.password;
   if (!email || !password) {
-      return res.status(400).json({ message: "les champs des formulaires ne doivent pas être vide" });
+      return res.status(400).json({ message: "Please fill in the form. " });
   } else {
       bcrypt.hash(password, 10)
           .then((hash) => {
@@ -142,7 +143,7 @@ exports.modifyUser = (req, res, next) => {
                       if (error) {
                           return res.status(400).json(error);
                       }
-                      return res.status(200).json({ message: 'Vos information ont bien été modifié !' });
+                      return res.status(200).json({ message: 'Your informations have been modified !' });
                   }
 
               );
