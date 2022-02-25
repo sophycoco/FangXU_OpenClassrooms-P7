@@ -1,6 +1,6 @@
 const Post = require("../models/post");
 const conn = require("../connection");
-const fs = require("fs");
+const fs = require("fs");  // access to operations related to file systems
 
 exports.createPost = (req, res, next) => {
   let image = "";
@@ -31,11 +31,12 @@ exports.createPost = (req, res, next) => {
 // Modifier un post
 exports.modifyPost = (req, res, next) => {
   req.body.email;
-  let image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-
+  /*let image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;*/
+  let image = "";
   if (req.file) {
     image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
+  console.log(req.file)
   conn.query(`SELECT * FROM post WHERE id=?`, req.params.id, (error, rows, fields) => {
     if (error) {
       return res.status(500).json({ error: "mysql" });

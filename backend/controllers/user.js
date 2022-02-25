@@ -56,21 +56,21 @@ exports.signup = (req, res, next) => {
 exports.login = async(req, res, next) => {
   console.table([req.body.email, req.body.password]);
   if (req.body.email && req.body.password) {
-      conn.query('SELECT * FROM user WHERE email= ?', /*cryptoEmail,*/req.body.email, (error, results, fields) => {
+      conn.query('SELECT * FROM user WHERE email= ?', req.body.email, (error, results, fields) => {
           if (results.length > 0) {
               bcrypt.compare(req.body.password, results[0].password)
-                  .then((valid) => { 
+                  .then((valid) => {
                       if (!valid) {
                           res.status(401).json({ message: 'Password incorrect' });
                       } else {
                           //confirmation User connecté
                           console.log(req.body.email, "is connected. ");
                           //admin or not
-                          if (results[0].isAdmin === 1) {
+                         /* if (results[0].isAdmin === 1) {
                               status = 'administrater';
                           } else {
                               status = 'member';
-                          }
+                          } */
                           res.status(200).json({
                               userId: req.body.id,
                               email: req.body.email,
