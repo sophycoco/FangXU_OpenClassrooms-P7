@@ -17,13 +17,13 @@ exports.createPost = (req, res, next) => {
     image: image,
   });
   if (!title && !content && !image) {
-    return res.status(400).json({ message: "Le titre ne peux pas être vide" });
+    return res.status(400).json({ message: "Your message is still empty. Please write something. " });
   } else {
     conn.query(`INSERT INTO post SET ?`, post, (error, result) => {
       if (error) {
         return res.status(400).json({ error: error });
       }
-      return res.status(201).json({ message: "Post crée!" });
+      return res.status(201).json({ message: "Message created !" });
     });
   }
 };
@@ -46,7 +46,7 @@ exports.modifyPost = (req, res, next) => {
         fs.unlink(`images/${filename}`, () => {
           conn.query(`UPDATE post SET content = ?, title = ?, image= ?  WHERE id = ?`, [req.body.content, req.body.title, image, req.params.id], (error, result) => {
             if (error) {
-              return res.status(400).json({ error: "Le post n'a pas pu être modifié" });
+              return res.status(400).json({ error: "The message cannot be modified. " });
             }
             return res.status(200).json(result);
           });
@@ -54,7 +54,7 @@ exports.modifyPost = (req, res, next) => {
       } else {
         conn.query(`UPDATE post SET content = ?, title = ?, WHERE id = ?`, [req.body.content, req.body.title, image, req.params.id], (error, result) => {
           if (error) {
-            return res.status(400).json({ error: "Le post n'a pas pu être modifié" });
+            return res.status(400).json({ error: "The message cannot be modified." });
           }
           return res.status(200).json(result);
         });
@@ -73,18 +73,18 @@ exports.deletePost = (req, res, next) => {
         fs.unlink(`images/${filename}`, () => {
           conn.query(`DELETE FROM post WHERE id=?`, req.params.id, (error, rows, fields) => {
             if (error) {
-              return res.status(500).json({ error: "impossible de supprimer" });
+              return res.status(500).json({ error: "Your message cannot be delected. " });
             } else {
-              return res.status(200).json({ message: "Message supprimé !" });
+              return res.status(200).json({ message: "Message deleted !" });
             }
           });
         });
       } else {
         conn.query(`DELETE FROM post WHERE id=?`, req.params.id, (error, rows, fields) => {
           if (error) {
-            return res.status(500).json({ error: "impossible de supprimer" });
+            return res.status(500).json({ error: "Your message cannot be delected." });
           } else {
-            return res.status(200).json({ message: "Message supprimé !" });
+            return res.status(200).json({ message: "Message deleted !" });
           }
         });
       }
@@ -93,9 +93,9 @@ exports.deletePost = (req, res, next) => {
 };
  
 exports.getAllPosts = (req, res, next) => {
-  conn.query("SELECT post.id, content, image, title, user_id, dateCreate, isAdmin, username  FROM post INNER JOIN user ON user.id = post.user_id ORDER BY dateCreate DESC", (error, result) => {
+  conn.query("SELECT post.id, content, image, title, user_id, dateCreate, isAdmin, username FROM post INNER JOIN user ON user.id = post.user_id ORDER BY dateCreate DESC", (error, result) => {
     if (error) {
-      return res.status(400).json({ error: "impossible d'afficher tous les post" });
+      return res.status(400).json({ error: "cannot display the messages" });
     }
     return res.status(200).json(result);
   });
@@ -104,7 +104,7 @@ exports.getAllPosts = (req, res, next) => {
 exports.getOnePost = (req, res, next) => {
   conn.query("SELECT post.id, content, image, title, user_id, dateCreate, isAdmin, username FROM post INNER JOIN user ON user.id = post.user_id WHERE post.id=? ", req.params.id, (error, result) => {
     if (error) {
-      return res.status(400).json({ error: "impossible d'afficher un  post" });
+      return res.status(400).json({ error: "cannot display the message" });
     }
     return res.status(200).json(result);
   });
