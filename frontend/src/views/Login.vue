@@ -70,6 +70,7 @@ export default {
     loginUser() {
       this.submited = true;
       this.$v.$touch();
+      console.log("login");
       if (!this.$v.$invalid) {
         const email = document.querySelector("#email").value;
         const password = document.querySelector("#password").value;

@@ -3,7 +3,7 @@
     <header id="header">
       <img class="logo" alt="logo" src="../src/assets/logo.png" />
     </header>
-    <div id="conn-connected"></div>
+    <div id="conn-connected"></div>   
     <router-view />
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   },
   created() {
     axios
-      .get(this.$localhost + "api/")
+      .get(this.$localhost + "api/auth/login")
       .then((response) => (this.conn = response.data))
       .catch((error) => {
         console.log(error);
@@ -36,6 +36,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+#header {
+  text-align: center;
 }
 
 #nav {

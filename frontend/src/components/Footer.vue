@@ -1,6 +1,6 @@
 <template>
   <div class="footernav">
-    <footer class="copyright">@2021 copyright: Groupomania</footer>
+    <footer class="copyright">@2022 copyright: Groupomania</footer>
   </div>
 </template>
 

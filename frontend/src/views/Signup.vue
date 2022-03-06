@@ -28,7 +28,6 @@
       Already a member ? Please login !
     </p>
     <router-link class="btn btn-danger" to="/">Login</router-link>
-
     <Footer />
   </main>
 </template>

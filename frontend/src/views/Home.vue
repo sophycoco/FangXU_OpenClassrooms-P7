@@ -3,7 +3,7 @@
     <h1>Welcome to Groupomania</h1>
     <Nav />
     <CreatePost />
-    <AllPost />
+    <AllPosts />
     <Footer />
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   components: {
     Nav,
     CreatePost,
-    AllPost,
+    AllPosts,
     Footer,
   },
 };

@@ -89,7 +89,9 @@ export default {
   methods: {
     getOneUser() {
       const token = localStorage.getItem("token");
-      const iduser = this.$route.params.id;
+      const iduser = this.$router.params.id;
+      console.log("getOneUser");
+      console.log("iduser"+iduser);
 
       if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

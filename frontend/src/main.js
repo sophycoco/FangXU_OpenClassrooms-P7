@@ -4,7 +4,7 @@ import router from "./router";
 
 Vue.config.productionTip = false;
 
-//declare a global variable
+//to declare a global variable
 Vue.prototype.$localhost = "http://localhost:3000/";
 
 import Vuelidate from "vuelidate";
