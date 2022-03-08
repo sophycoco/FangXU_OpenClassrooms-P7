@@ -1,28 +1,28 @@
 <template>
   <main id="app">
     <h1>Welcome to Groupomania</h1>
-    <form class="px-4 py-3 signin">
-      <div class="form-group">
+    <form class="signin">
+      <div class="form">
         <label for="email">Email address</label>
         <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br>
         <span class="error" v-if="(!$v.email.required && $v.email.$dirty)">Please provide a valid email address.</span>
       </div>
-      <div class="form-group">
+      <div class="form">
         <label for="password">Password</label>
         <input type="password" class="form-control" v-model="password" id="password" aria-required="true" required /><br>
         <span class="error" v-if="(!$v.password.required && $v.password.$dirty )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
         <span class="error" v-if="(!$v.password.valid && !$v.password.minLength )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
       </div>
-      <button type="submit" class="btn btn-danger signup" v-on:click="loginUser()">
+      <button type="submit" class="btn signup" v-on:click="loginUser()">
         Login
       </button><br>
       <span id="notfound" class="error"> </span>
     </form>
-    <div class="dropdown-divider separation"></div>
-    <p class="dropdown-item encouragement">
+    <div class="separation"></div>
+    <p class="encouragement">
       Not a member yet ? Please signup !
     </p>
-    <router-link class="btn btn-danger" to="/Signup">Signup</router-link>
+    <router-link class="btn signup" to="/Signup"><button>Signup</button></router-link>
 
     <Footer />
   </main>

@@ -1,33 +1,33 @@
 <template>
   <main id="app">
     <h1>Welcome to Groupomania</h1>
-    <form class="px-4 py-3 signin">
-      <div class="form-group">
+    <form class="signup">
+      <div class="form">
         <label for="email">Email address</label>
         <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br>
         <span class="error" v-if="(!$v.email.required && $v.email.$dirty)">Please provide a valid email address.</span>
       </div>
-      <div class="form-group">
-        <label for="username">Your name</label>
-        <input type="text" class="form-control" id="username" v-model="username" name="username" placeholder="Sophie Marceau" aria-required="true" required /><br>
-        <span class="error" v-if="(!$v.username.required && $v.username.$dirty)">Please enter your given name and your family name. </span>
+      <div class="form">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" v-model="username" name="username" aria-required="true" required /><br>
+        <span class="error" v-if="(!$v.username.required && $v.username.$dirty)">Please choose your username. </span>
       </div>
-      <div class="form-group">
+      <div class="form">
         <label for="password">Password</label>
         <input type="password" class="form-control" v-model="password" id="password" aria-required="true" required /><br>
         <span class="error" v-if="(!$v.password.required && $v.password.$dirty )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
         <span class="error" v-if="(!$v.password.valid && !$v.password.minLength )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
       </div>
-      <button type="submit" class="btn btn-danger signup" @click="createUser()">
+      <button type="submit" class="btn signup" @click="createUser()">
         Submit
       </button>
-      <span id="notfound" class="error">Failed to submit. Please make sure to complete all the fields required.</span>
+      <!--<span id="notfound" class="error">Failed to submit. Please make sure to complete all the fields required.</span>-->
     </form>
-    <div class="dropdown-divider separation"></div>
-    <p class="dropdown-item encouragement">
+    <div class="separation"></div>
+    <p class="encouragement">
       Already a member ? Please login !
     </p>
-    <router-link class="btn btn-danger" to="/">Login</router-link>
+    <router-link class="btn login" to="/"><button>Login</button></router-link>
     <Footer />
   </main>
 </template>

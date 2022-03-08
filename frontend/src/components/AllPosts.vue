@@ -5,12 +5,12 @@
         <div class="card-body product-body">
           <h2 class="card-title name">{{ art.title }}</h2>
           <div class="dropdown-divider separation"></div>
-          <p class="card-text price">{{ art.content}}</p>
+          <p class="card-text">{{ art.content}}</p>
           <div>
             <img class="card-img-top product-img" :alt="art.id" :src="art.image" v-if="art.image != 0" />
           </div>
           <div class="dropdown-divider separation"></div>
-          <ul class="navbar-nav mt-2 mt-lg-0 flex-row">
+          <ul class="navbar-nav">
             <li class="nav-item active userinfo">
               <p>Crée par <span class="namecreat"> {{art.username}}</span> </p>
             </li>
