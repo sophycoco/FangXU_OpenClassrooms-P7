@@ -14,9 +14,9 @@ module.exports = (req, res, next) => {
     console.log(isAdmin);
     console.log(userId);
     console.log(decodedToken);
-    conn.query("SELECT * FROM user WHERE id = ?", req.params.id, (error, result) => {
-      console.log(result[0]);
-      if (req.params.id === userId || isAdmin === 1) {
+    conn.query("SELECT * FROM user WHERE id = ?", req.params.id, (error, results) => {
+      console.log(results[0].id);
+      if (results[0].id === userId || isAdmin === 1) {
         console.log("authorised");
         next();
       } else {
