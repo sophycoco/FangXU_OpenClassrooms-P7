@@ -3,47 +3,58 @@
     <h1>Welcome to Groupomania</h1>
     <Nav />
     <div class="mx-auto">
-      <div v-for="(art,idx) in arts" :key="idx">
+      <div v-for="(art, idx) in arts" :key="idx">
         <div class="card card-product mx-auto">
           <div class="card-body product-body">
             <h2 class="card-title name">{{ art.title }}</h2>
-            <div class="dropdown-divider separation"></div>
-            <p class="card-text price">{{ art.content}}</p>
+            <div class="separation"></div>
+            <p class="card-text price">{{ art.content }}</p>
             <div>
               <img class="card-img-top product-img" alt="imagespost" :src="art.image" v-if="art.image != 0" />
               <img class="card-img-top product-img" :src="art.image" v-else-if="imgoff" />
             </div>
-            <div class="dropdown-divider separation"></div>
+            <div class="separation"></div>
             <ul class="navbar-nav mt-2 mt-lg-0 flex-row">
               <li class="nav-item active userinfo">
-                <p>Created by <span class="namecreat">{{ art.username}}</span></p>
+                <p>
+                  Created by <span class="namecreat">{{ art.username }}</span>
+                </p>
               </li>
               <li class="nav-item">
-                <span class=""> {{ datePost(art.dateCreate)}} </span>
+                <span class=""> {{ datePost(art.dateCreate) }} </span>
               </li>
             </ul>
-            <router-link class="btn btn-danger mt-5" :to="`/update/${art.id}`" v-if="userId == art.user_id || admin == 1">Modify your article</router-link>
+            <router-link class="btn btn-danger" :to="`/post/${art.id}`" v-if="userId == art.user_id || isAdmin == 1"> Modify your article </router-link>
           </div>
           <div class="container mb-5">
             <div class="row d-flex justify-content-center">
               <div class="col-md-10">
                 <div class="headings d-flex justify-content-between align-items-center mb-3">
                   <label for="contentcomm" title="contentcomm" class="sr-only">Comment</label>
-                  <input type="text" class="form-control textarea " rows="2" id="contentcomm" v-model="comment" required>
-                  <button type="submit" class="btn btn-danger signup ml-2" @click="PostComm()">Comment</button>
+                  <input type="text" class="form-control textarea" rows="2" id="contentcomm" v-model="comment" required />
+                  <button type="submit" class="btn submit" @click="postComm()">Comment</button>
                 </div>
-                <span class="error" v-if="(!$v.comment.required && $v.comment.$dirty)">Your comment could not be empty. </span>
+                <span class="error" v-if="!$v.comment.required && $v.comment.$dirty"> Your comment could not be empty. </span>
 
-                <div class="card p-3 idcomm mt-4" :id="comm.id" v-for="(comm,indx) in comms" :key="indx">
+                <div class="card p-3 idcomm mt-4" :id="comm.id" v-for="(comm, indx) in comms" :key="indx">
                   <div class="d-flex justify-content-between align-items-center">
-                    <div class="user d-flex flex-row align-items-center"><span><small class="font-weight-bold  "><span class="nametitle">{{comm.username}} </span> a répondu </small></span> </div>
+                    <div class="user d-flex flex-row align-items-center">
+                      <span><small class="font-weight-bold" ><span class="nametitle">{{ comm.username }} </span>
+                          replied
+                        </small></span>
+                    </div>
                   </div>
-                  <div class="d-flex justify-content-between align-items-center px-3 contentcommentaire ">
-                    <div class="user d-flex flex-row align-items-center"><span> <small class="font-weight-bold">{{comm.content}}</small></span> </div>
+                  <div class="d-flex justify-content-between align-items-center px-3 contentcommentaire">
+                    <div class="user d-flex flex-row align-items-center">
+                      <span><small class="font-weight-bold">{{ comm.content }}</small></span>
+                    </div>
                   </div>
                   <div class="action d-flex justify-content-between mt-2 align-items-center">
-                    <button class="reply px-4 smallsize" v-if="userId == comm.user_id || admin == 1 " @click="deletecomm()"> Delete</button>
-                    <div class="icons align-items-center" v-if="userId == comm.user_id || admin == 1 "> <i class="fas fa-globe "></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
+                    <button class="reply px-4 smallsize" v-if="userId == comm.user_id || isAdmin == 1" @click="deletecomm()">Delete</button>
+                    <div class="icons align-items-center" v-if="userId == comm.user_id || isAdmin == 1">
+                      <i class="fas fa-globe"></i>
+                      <i class="fa fa-check-circle-o check-icon"></i>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -51,7 +62,7 @@
           </div>
         </div>
 
-        <div class="dropdown-divider separation"></div>
+        <div class="separation"></div>
       </div>
     </div>
     <Footer />
@@ -79,7 +90,7 @@ export default {
       comms: [],
       imgoff: 0,
       userId: VueJwtDecode.decode(localStorage.getItem("token")).userId,
-      admin: VueJwtDecode.decode(localStorage.getItem("token")).isAdmin,
+      isAdmin: VueJwtDecode.decode(localStorage.getItem("token")).isAdmin,
     };
   },
   validations: {
@@ -118,14 +129,53 @@ export default {
         });
     },
 
-    PostComm() {
+    updatePost() {
+      this.submited = true;
+      console.log("submited");
+      /*this.$v.$touch();
+      if (!this.$v.$invalid) {*/
+      const token = localStorage.getItem("token");
+      const iduser = this.$route.params.id;
+      const email = document.querySelector("#email").value;
+      const password = document.querySelector("#password").value;
+      const username = document.querySelector("#username").value;
+
+      console.log(token);
+      console.log("updateOneUser");
+      console.log("iduser" + iduser);
+
+      let users = {
+        email: email,
+        password: password,
+        username: username,
+      };
+      console.log(users);
+
+      axios
+        .put(this.$localhost + "api/auth/" + iduser, users, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "bearer " + token,
+          },
+        })
+        .then((res) => {
+          if (res) {
+            localStorage.setItem("users", JSON.stringify(users));
+            this.$router.push("../Home");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      /*}*/
+    },
+
+    postComm() {
       this.submited = true;
       this.$v.$touch();
       if (!this.$v.$invalid) {
         const token = localStorage.getItem("token");
-        const userId = VueJwtDecode.decode(
-          localStorage.getItem("token")
-        ).userId;
+        const userId = VueJwtDecode.decode(localStorage.getItem("token")).userId;
         const idPost = this.$route.params.id;
 
         const formcomm = {
@@ -136,7 +186,7 @@ export default {
 
         console.log(formcomm);
         axios
-          .post(this.$localhost + "api/comm/create", formcomm, {
+          .post(this.$localhost + "api/comm", formcomm, {
             headers: {
               "Content-Type": "application/json",
               Authorization: "bearer " + token,
@@ -165,6 +215,7 @@ export default {
         })
         .then((res) => {
           this.comms = res.data;
+          console.log(res.data);
         })
         .catch((error) => {
           console.log(error);

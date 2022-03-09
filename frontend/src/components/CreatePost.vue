@@ -17,7 +17,7 @@
         </div>
         <span class="error" v-if="(!$v.content.required && $v.content.$dirty)">Please add an article and an image. </span><br><br>
         <span id="notfound" class="error"> </span>
-        <button type="submit" class="btn submit" @click="Postform()">Submit</button>
+        <button type="submit" class="btn submit" @click="postform()">Submit</button>
       </form>
     </div>
   </main>
@@ -51,7 +51,7 @@ export default {
       console.log(this.file);
     },
 
-    Postform() {
+    postform() {
       this.submited = true;
       this.$v.$touch();
       if (!this.$v.$invalid) {
