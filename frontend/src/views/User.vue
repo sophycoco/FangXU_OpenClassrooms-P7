@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <div class="dropdown-divider separation"></div>
+        <div class="separation"></div>
       </div>
     </div>
     <Footer />
@@ -142,11 +142,11 @@ export default {
           console.log(error);
         });
     },
-    updateUser() {
+    /*updateUser() {
       this.submited = true;
       console.log("submited");
       /*this.$v.$touch();
-      if (!this.$v.$invalid) {*/
+      if (!this.$v.$invalid) {
       const token = localStorage.getItem("token");
       const iduser = this.$route.params.id;
       const email = document.querySelector("#email").value;
@@ -180,8 +180,8 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-      /*}*/
-    },
+      }
+    },*/
   },
 };
 </script>
@@ -192,7 +192,7 @@ h1 {
   font-size: 20px;
 }
 .card-product {
-  display: flex;
+  align-items: center;
   border-radius: 20px 20px;
   width: 60%;
 }

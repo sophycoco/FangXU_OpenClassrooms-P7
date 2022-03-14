@@ -14,7 +14,7 @@
             <button class="nav-link" @click="Logout()">Logout</button>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/Home">News feed</router-link>
+            <router-link class="nav-link" to="/Home">Home</router-link>
           </li>
         </ul>
       </div>

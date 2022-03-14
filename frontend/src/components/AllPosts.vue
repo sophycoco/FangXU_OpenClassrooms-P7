@@ -3,26 +3,25 @@
     <div :id="art.id" v-for="(art,idx) in arts" :key="idx">
       <div class="card card-product mx-auto">
         <div class="card-body product-body">
-          <h2 class="card-title name">{{ art.title }}</h2>
-          <div class="dropdown-divider separation"></div>
+          <h2 class="card-title">{{ art.title }}</h2>
+          <div class="separation"></div>
           <p class="card-text">{{ art.content}}</p>
           <div>
-            <img class="card-img-top product-img" :alt="art.id" :src="art.image" v-if="art.image != 0" />
+            <img class="card-img" :alt="art.id" :src="art.image" v-if="art.image != 0" />
           </div>
-          <div class="dropdown-divider separation"></div>
+          <div class="separation"></div>
           <ul class="navbar-nav">
-            <li class="nav-item active userinfo">
+            <li class="nav-item">
               <p>Crée par <span class="namecreat"> {{art.username}}</span> </p>
             </li>
             <li class="nav-item">
               <span class=""> {{ datePost(art.dateCreate)}} </span>
             </li>
           </ul>
-          <!-- <a :href="`/post/${art.id}`">link</a>-->
-          <router-link class="btn btn-danger name mt-5 text-center d-block " :to="`/post/${art.id}`">Comments</router-link>
+          <router-link class="btn text-center" :to="`/post/${art.id}`">Comments</router-link>
         </div>
       </div>
-      <div class="dropdown-divider separation"></div>
+      <div class="separation"></div>
     </div>
   </div>
 </template>
@@ -86,13 +85,14 @@ export default {
 <style scoped>
 .card-product {
   display: flex;
+  align-self:center;
   border-radius: 20px 20px;
   width: 50%;
 }
-.product-img {
+.card-img {
   object-fit: contain;
 }
-.userinfo {
+.nav-item {
   margin-right: 15px;
 }
 .namecreat {
@@ -105,7 +105,7 @@ export default {
     border-radius: 20px 20px;
     width: 80%;
   }
-  .product-img {
+  .card-img {
     width: 100%;
     object-fit: contain;
   }

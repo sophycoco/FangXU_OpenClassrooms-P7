@@ -11,6 +11,7 @@ module.exports = (req, res, next) => {
     conn.query('SELECT post.id, user_id FROM post INNER JOIN user ON user.id = post.user_id WHERE post.id=? ', req.params.id, (error, result) => {
         if ((result[0].user_id === userId) || isAdmin === 1) {
             console.log("authorised");
+            console.log(result[0].user_id);
             next();
         } else {
             res.status(403).json({ message: "Action not authorised." });

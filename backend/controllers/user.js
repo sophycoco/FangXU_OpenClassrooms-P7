@@ -103,6 +103,7 @@ exports.modifyUser = (req, res, next) => {
   const email = req.body.email;
   const id = req.params.id;
   let password = req.body.password;
+  let username = req.body.username;
   if (!email || !password) {
     return res.status(400).json({ message: "Please fill in the form. " });
   } else {
@@ -110,7 +111,7 @@ exports.modifyUser = (req, res, next) => {
       .hash(password, 10)
       .then((hash) => {
         password = hash;
-        conn.query(`UPDATE user SET email='${email}', password='${password}', isAdmin=${0}  WHERE id=?`, id, (error, results, fields) => {
+        conn.query(`UPDATE user SET email='${email}', username='${username}', password='${password}', isAdmin=${0}  WHERE id=?`, id, (error, results, fields) => {
           if (error) {
             return res.status(400).json(error);
           }

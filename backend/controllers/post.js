@@ -52,7 +52,7 @@ exports.modifyPost = (req, res, next) => {
           });
         });
       } else {
-        conn.query(`UPDATE post SET content = ?, title = ?, WHERE id = ?`, [req.body.content, req.body.title, image, req.params.id], (error, result) => {
+        conn.query(`UPDATE post SET content = ?, title = ? WHERE id = ?`, [req.body.content, req.body.title, req.params.id], (error, result) => {
           if (error) {
             return res.status(400).json({ error: "The message cannot be modified." });
           }

@@ -20,8 +20,8 @@
       </div>
       <button type="submit" class="btn signup" @click="createUser()">
         Submit
-      </button>
-      <!--<span id="notfound" class="error">Failed to submit. Please make sure to complete all the fields required.</span>-->
+      </button><br>
+      <span id="notfound" class="error">If you are already a member, please login directly.</span>
     </form>
     <div class="separation"></div>
     <p class="encouragement">
@@ -89,12 +89,12 @@ export default {
           password: password,
           username: username,
         };
-        // Verifie que utilisateur a bien remplie tous les champs
+        // Check that the user has filled in all the fields
         if (users.email == "" || users.password == "" || users.username == "") {
           users = {
             userVerification: false,
           };
-        } // Permet d'envoyer les information pour la creation d'un profil
+        } // to send information to create an account
         axios
           .post(this.$localhost + "api/auth/signup", users)
           .then((res) => {
@@ -104,7 +104,7 @@ export default {
           .catch((error) => {
             console.log(error);
             document.getElementById("notfound").innerHTML =
-              "An error has occurred, please try again later.";
+              "Email address or username already used. ";
           });
       }
     },
