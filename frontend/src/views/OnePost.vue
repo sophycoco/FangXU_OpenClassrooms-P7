@@ -25,7 +25,7 @@
                   <span class=""> {{ datePost(art.dateCreate) }} </span>
                 </li>
               </ul>
-              <router-link class="btn submit" to="/update/:id" v-if="userId == art.user_id || isAdmin == 1"><button class="btn submit"> Modify your article </button></router-link>
+              <router-link class="btn submit" :to="`/update/${art.id}`" v-if="userId == art.user_id || isAdmin == 1"><button class="btn submit"> Modify your article </button></router-link>
               <!--<button class="btn submit" @click="updatePost()"> Modify your article </button>      "`/post/${art.id}`"  --> 
             </div>
           </div>
