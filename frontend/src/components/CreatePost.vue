@@ -3,13 +3,13 @@
     <div>
       <form class="Post" id="formpost" encType="multipart/form-data">
         <div class="form">
-          <label for="title">Title</label>
+          <label for="title">What's on your mind?</label><br />
           <input type="text" class="form-control" id="title" v-model="title" aria-required="true" required /><br>
           <span class="error" v-if="(!$v.title.required && $v.title.$dirty)">Please enter a title.</span>
         </div>
         <div class="form">
-          <label for="content">Content</label>
-          <textarea class="form-control textarea " v-model="content" rows="3" id="content" aria-required="true" required></textarea>
+          <label for="content">Tell us something more!</label><br />
+          <textarea class="form-control textarea " v-model="content" rows="10" id="content" aria-required="true" required></textarea>
         </div>
         <div class="form">
           <label class="sr-only" for="image" title="image" role="button">Image</label>
@@ -98,8 +98,23 @@ export default {
 </script>
 
 <style scoped>
-#post {
-  text-align: left;
+.form {
+  margin: 15px
+}
+.form-control {
+  width: 100%;
+  background-color: #14285e96;
+  font-family: inherit;
+  padding: 10px;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  color: antiquewhite;
+  font-style: bold;
+}
+#formpost {
+  text-align: center;
+  margin: auto;
+  width: 40%;
 }
 .error {
   color: #e55252cb;

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header id="header">
-      <img class="logo" alt="logo" src="../src/assets/logo.png" />
+      <img class="logo" alt="logo" src="../src/assets/icon-left-font-monochrome-white.png" />
     </header>
     <div id="conn-connected"></div>   
     <router-view />
@@ -36,14 +36,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  max-width: 1600px;
+  margin: auto;
+  background-color: #14285e60;
 }
 
 #header {
-  text-align: center;
+  background-color: #14285e;
 }
 
-#nav {
-  padding: 30px;
+/*#nav {
+  padding: 30px 0 100px 0;
 }
 #nav a {
   font-weight: bold;
@@ -53,16 +56,19 @@ export default {
   color: #e55252cb;
 }
 .logo {
-  width: 50%;
+  width: 60%;
   text-align: right;
 }
 .navigation {
   text-align: center;
 }
+.navbar-collapse {
+  text-align: center;
+}
 .btn-primary {
   background-color: #e55252cb;
   font-weight: 600;
-}
+}*/
 #conn-connected {
   text-align: center;
   font-size: 24px;
@@ -70,7 +76,7 @@ export default {
 }
 @media (min-width: 1024px) {
   .logo {
-    width: 20%;
+    width: 30%;
   }
 }
 </style>

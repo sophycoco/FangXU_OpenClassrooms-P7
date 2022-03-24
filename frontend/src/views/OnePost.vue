@@ -2,9 +2,9 @@
   <div class="Home">
     <h1>Welcome to Groupomania</h1>
     <Nav />
-    <div class="mx-auto">
+    <div class="onepost">
       <div v-for="(art, idx) in arts" :key="idx">
-        <div class="card card-product mx-auto">
+        <div class="card card-product">
           <div class="card-body product-body">
             <div class="post-form">
               <h2 class="card-title" id="title">{{ art.title }}</h2>
@@ -15,7 +15,7 @@
                 <img class="card-img" :src="art.image" v-else-if="imgoff" />
               </div>
               <div class="separation"></div>
-              <ul class="navbar-nav">
+              <ul>
                 <li class="nav-item">
                   <p>
                     Created by <span class="namecreat">{{ art.username }}</span>
@@ -26,21 +26,20 @@
                 </li>
               </ul>
               <router-link class="btn submit" :to="`/update/${art.id}`" v-if="userId == art.user_id || isAdmin == 1"><button class="btn submit"> Modify your article </button></router-link>
-              <!--<button class="btn submit" @click="updatePost()"> Modify your article </button>      "`/post/${art.id}`"  --> 
             </div>
           </div>
-          <div class="container mb-5">
-            <div class="justify-content-center">
+          <div class="container">
+            <div class="">
               <div class="">
-                <div class="headings justify-content-between align-items-center">
-                  <label for="contentcomm" title="contentcomm" class="sr-only">Comment</label>
-                  <input type="text" class="form-control textarea" rows="2" id="contentcomm" v-model="comment" required />
-                  <button type="submit" class="btn submit" @click="postComm()">Comment</button>
+                <div class="comment">
+                  <label for="contentcomm" title="contentcomm">Let me know what you think! </label>
+                  <textarea type="text" class="form-control textarea" rows="5" id="contentcomm" v-model="comment" required></textarea><br />
+                  <button type="submit" class="btn submit" @click="postComm()">send</button>
                 </div>
                 <span class="error" v-if="!$v.comment.required && $v.comment.$dirty"> Your comment could not be empty. </span>
 
                 <div class="card idcomm" :id="comm.id" v-for="(comm, indx) in comms" :key="indx">
-                  <div class="justify-content-between align-items-center">
+                  <div class="">
                     <div class="user align-items-center">
                       <span
                         ><small class="font-weight-bold"
@@ -50,7 +49,7 @@
                       >
                     </div>
                   </div>
-                  <div class="justify-content-between align-items-center contentcommentaire">
+                  <div class="contentcommentaire">
                     <div class="user align-items-center">
                       <span
                         ><small class="font-weight-bold">{{ comm.content }}</small></span
@@ -286,16 +285,50 @@ export default {
 
 <style scoped>
 .card-product {
-  display: flex;
-  width: 100%;
-  width: 50%;
+  border-radius: 20px 20px;
+  width:70%;
+  margin: 25px auto 25px auto;
+  box-shadow: 0 5px 15px 0 #14285e96;
+  padding: 25px;
 }
 .card-img {
-  width: 100%;
-  object-fit: contain;
+  object-fit:fill;
+  max-width: 100%;
+  height: auto;
+}
+.post-form{
+  padding: 0 0 25px 0;
+}
+.container {
+  width: 40%;
+  margin: auto;
+}
+.form-control {
+  width:100%;
+  padding:0;
+}
+ul {
+  padding:0;
 }
 .nav-item {
-  margin-right: 15px;
+  text-decoration: none;
+  list-style: none;
+}
+.container {
+  padding:15px 0 20px 0;
+}
+.form-control {
+  width: 100%;
+  background-color: #14285e96;
+  font-family: inherit;
+  padding: 10px;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  color: antiquewhite;
+  font-style: bold;
+}
+.comment {
+  margin-bottom: 30px;
 }
 h1 {
   text-align: center;
@@ -318,6 +351,9 @@ h1 {
 }
 .error {
   color: #e55252cb;
+}
+button {
+  background-color: transparent;
 }
 
 @media (min-width: 320px) and (max-width: 1024px) {

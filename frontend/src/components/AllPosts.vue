@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-auto">
+  <div class="allposts">
     <div :id="art.id" v-for="(art,idx) in arts" :key="idx">
-      <div class="card card-product mx-auto">
+      <div class="card card-product">
         <div class="card-body product-body">
           <h2 class="card-title">{{ art.title }}</h2>
           <div class="separation"></div>
@@ -12,7 +12,7 @@
           <div class="separation"></div>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <p>Crée par <span class="namecreat"> {{art.username}}</span> </p>
+              <p>Created by <span class="namecreat"> {{art.username}}</span> </p>
             </li>
             <li class="nav-item">
               <span class=""> {{ datePost(art.dateCreate)}} </span>
@@ -83,17 +83,36 @@ export default {
 </script>
 
 <style scoped>
+.allposts{
+  margin: 25px auto auto auto;
+  background-color: #ccacac;
+  box-shadow: 0 5px 15px 0 #926d6d;
+  padding: 15px 0 20px 0;
+}
 .card-product {
   display: flex;
   align-self:center;
   border-radius: 20px 20px;
-  width: 50%;
+  width:70%;
+  margin: 25px auto 25px auto;
+  box-shadow: 0 5px 15px 0 #926d6d;
+  padding: 25px;
+}
+
+.card-body {
+  margin: auto;
+}
+ul {
+  padding:0;
 }
 .card-img {
-  object-fit: contain;
+  object-fit:fill;
+  max-width: 100%;
+  height: auto;
 }
 .nav-item {
-  margin-right: 15px;
+  text-decoration: none;
+  list-style: none;
 }
 .namecreat {
   color: #8e1801;
@@ -106,7 +125,6 @@ export default {
     width: 80%;
   }
   .card-img {
-    width: 100%;
     object-fit: contain;
   }
 }

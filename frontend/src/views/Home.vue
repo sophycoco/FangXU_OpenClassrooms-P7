@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Welcome to Groupomania</h1>
+    <h1>WELCOME TO GROUPOMANIA</h1>
     <Nav />
     <CreatePost />
     <AllPosts />
@@ -27,6 +27,9 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  margin:50px auto;
+}
 h1 {
   text-align: center;
   font-size: 20px;

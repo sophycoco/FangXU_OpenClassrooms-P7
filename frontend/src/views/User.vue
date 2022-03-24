@@ -8,21 +8,21 @@
           <div class="card-body product-body">
             <h2 class="card-title name">{{ user.username }}</h2>
             <div class="separation"></div>
-            <div class="forms">
-              <div class="form">
-                <label for="email">Change my email address</label>
+            <div class="form">
+              <div class="form-change">
+                <label for="email">Change my email address</label> <br />
                 <input type="email" class="form-control" v-model="email" id="email" required /><br />
                 <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid email address.</span>
               </div>
 
-              <div class="form">
-                <label for="username">Change my username</label>
+              <div class="form-change">
+                <label for="username">Change my username</label> <br />
                 <input type="username" class="form-control" v-model="username" id="username" required /><br />
                 <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid username.</span>
               </div>
 
-              <div class="form">
-                <label for="password">Change my password</label>
+              <div class="form-change">
+                <label for="password">Change my password</label> <br />
                 <input type="password" class="form-control" v-model="password" id="password" required /><br />
                 <span class="error" v-if="!$v.password.required && $v.password.$dirty"
                   >Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span
@@ -32,7 +32,7 @@
                 >
               </div>
             </div>
-            <button class="btn btn-modify" v-if="userId == user.id || isAdmin == 1" @click="updateUser()">Modify account informations</button><br />
+            <button class="btn btn-modify" v-if="userId == user.id || isAdmin == 1" @click="updateUser()">Modify account informations</button>
             <button class="btn btn-delete" v-if="userId == user.id || isAdmin == 1" @click="deleteuser()">Delete account</button>
           </div>
         </div>
@@ -142,11 +142,11 @@ export default {
           console.log(error);
         });
     },
-    /*updateUser() {
+    updateUser() {
       this.submited = true;
       console.log("submited");
       /*this.$v.$touch();
-      if (!this.$v.$invalid) {
+      if (!this.$v.$invalid) {*/
       const token = localStorage.getItem("token");
       const iduser = this.$route.params.id;
       const email = document.querySelector("#email").value;
@@ -180,13 +180,17 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-      }
-    },*/
+      /*}*/
+    },
   },
 };
 </script>
 
 <style scoped>
+.profil {
+  margin: 0 auto;
+  max-width: 1600px;
+}
 h1 {
   text-align: center;
   font-size: 20px;
@@ -199,6 +203,25 @@ h1 {
 .name {
   color: #e55252cb;
 }
+.form-change {
+  justify-content: center;
+  margin: 15px;
+}
+.form {
+  width: 40%;
+  margin: auto;
+}
+.form-control {
+  width: 100%;
+  background-color: whitesmoke;
+  font-family: inherit;
+  padding: 10px;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  color: inherit;
+  font-style: bold;
+}
+
 .userinfo {
   margin-right: 15px;
 }

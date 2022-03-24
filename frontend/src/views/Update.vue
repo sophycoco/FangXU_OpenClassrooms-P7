@@ -5,20 +5,22 @@
       <h2>Modify your article</h2>
       <form class="Post" id="formpost" encType="multipart/form-data">
         <div class="form-group">
-          <label for="title">Title</label>
+          <label for="title">Title</label> <br />
           <input type="text" class="form-control" v-model="title" id="title" aria-required="true" required />
           <span class="error" v-if="!$v.title.required && $v.title.$dirty">Please input the title of your article</span>
         </div>
         <div class="form-group">
-          <label for="content">Content</label>
-          <textarea class="form-control textarea" id="content" aria-required="true"></textarea>
+          <label for="content">Content</label> <br />
+          <textarea class="form-control textarea" row="5" id="content" aria-required="true"></textarea>
         </div>
         <div class="form-group">
-          <label for="image" title="image" role="button">Image</label>
+          <label for="image" class="sr-only" title="image" role="button">Image</label>
           <input type="file" accept=".png, .jpg, .jpeg, .gif, .webp" v-on:change="onSelect" aria-required="true" ref="file" id="image" />
         </div>
-        <button type="submit" class="btn btn-danger signup" @click="updateForm()">Modify</button>
-        <button type="submit" class="btn btn-danger signup ml-5" @click="deleteForm()">Delete</button>
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger signup" @click="updateForm()">Modify</button>
+          <button type="submit" class="btn btn-danger signup" @click="deleteForm()">Delete</button>
+        </div>
       </form>
       <Footer />
     </div>
@@ -85,7 +87,6 @@ export default {
         formData.append("image", this.file);
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("user_id", userId);
 
         console.log(formData);  //error
         axios
@@ -129,14 +130,30 @@ export default {
 
 <style scoped>
 #updatePost {
-  text-align: left;
+  text-align: center;
 }
 h2 {
+  text-align: center;
   padding: 20px;
   font-size: 18px;
 }
 .Post {
-  margin-top: 45px;
-  margin-bottom: 125px;
+  width: 40%;
+  margin: auto;
 }
+.form-control {
+  width: 70%;
+  background-color: #14285e96;
+  font-family: inherit;
+  padding: 10px;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  color: antiquewhite;
+  font-style: bold;
+}
+
+.form-group {
+  margin: 15px 0;
+}
+
 </style>
