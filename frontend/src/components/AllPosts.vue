@@ -18,7 +18,7 @@
               <span class=""> {{ datePost(art.dateCreate)}} </span>
             </li>
           </ul>
-          <router-link class="btn text-center" :to="`/post/${art.id}`">Comments</router-link>
+          <router-link class="btn text-center" :to="`/post/${art.id}`">See more ...</router-link>
         </div>
       </div>
       <div class="separation"></div>
@@ -115,7 +115,8 @@ ul {
   list-style: none;
 }
 .namecreat {
-  color: #8e1801;
+  color: whitesmoke;
+  font-style: strong;
 }
 @media (min-width: 320px) and (max-width: 1000px) {
   .card-product {

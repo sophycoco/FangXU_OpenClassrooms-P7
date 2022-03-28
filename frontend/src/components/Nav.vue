@@ -60,9 +60,11 @@ ul {
   color: #2c3e50;
 }
 .nav-item:hover, .nav-link:hover {
-  background-color: #14285e;
-  color:antiquewhite;
-  
+  background-color: #ff5050e5;
+  color:whitesmoke;
+  font-style: bold;
+  padding: 2px 5px;
+  border-radius: 4px;  
 }
 .nav-link
  {

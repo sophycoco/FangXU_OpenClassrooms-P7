@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header id="header">
-      <img class="logo" alt="logo" src="../src/assets/icon-left-font-monochrome-white.png" />
+      <img class="logo" alt="logo-main" src="../src/assets/icon-logo-white.png" />
     </header>
     <div id="conn-connected"></div>   
     <router-view />
@@ -43,6 +43,36 @@ export default {
 
 #header {
   background-color: #14285e;
+}
+
+.logo {
+  width: 60%;
+}
+.form-control {
+  width: 50%;
+  background-color: #14285e96;
+  font-family: inherit;
+  padding: 10px;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  color: antiquewhite;
+  font-style: bold;
+}
+.form {
+  margin: 10px 0 20px 0;
+}
+.btn{
+  color: whitesmoke;
+  background-color: #ff5050e5;
+  border: none;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  padding: 3px 10px;
+}
+.error {
+  color: #970000;
+  font-size: 20px;
+  font-style:bold;
 }
 
 /*#nav {

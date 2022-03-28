@@ -25,7 +25,7 @@
                   <span class=""> {{ datePost(art.dateCreate) }} </span>
                 </li>
               </ul>
-              <router-link class="btn submit" :to="`/update/${art.id}`" v-if="userId == art.user_id || isAdmin == 1"><button class="btn submit"> Modify your article </button></router-link>
+              <router-link class="btn submit" :to="`/update/${art.id}`" v-if="userId == art.user_id || isAdmin == 1"><button class="btn submit">Modify your article</button></router-link>
             </div>
           </div>
           <div class="container">
@@ -56,12 +56,8 @@
                       >
                     </div>
                   </div>
-                  <div class="action justify-content-between align-items-center">
-                    <button class="reply smallsize" type="submit" v-if="userId == comm.user_id || isAdmin == 1" @click="deletecomm()">Delete</button>
-                    <!--<div class="icons align-items-center" v-if="userId == comm.user_id || isAdmin == 1">
-                      <i class="fas fa-globe"></i>
-                      <i class="fa fa-check-circle-o check-icon"></i> 
-                    </div>-->
+                  <div class="">
+                    <button class="btn reply smallsize" type="submit" v-if="userId == comm.user_id || isAdmin == 1" @click="deletecomm()">Delete</button>
                   </div>
                 </div>
               </div>
@@ -136,51 +132,6 @@ export default {
         });
     },
 
-    /*updatePost() {
-      this.submited = true;
-      console.log("submited");
-      this.$v.$touch();
-      /*if (!this.$v.$invalid) { 
-      const token = localStorage.getItem("token");
-      /*const userId = VueJwtDecode.decode(localStorage.getItem("token")).userId;
-
-      const idPost = this.$route.params.id;
-      const title = document.querySelector("#title").value;
-
-      console.log(title);
-      const content = document.querySelector("#content").value;
-      const image = document.querySelector("#image").value;
-
-      console.log(token);
-      console.log("updatePost");
-      console.log("idPost" + idPost);
-
-      let posts = {
-        title: title,
-        content: content,
-        image: image,
-      };
-      console.log(posts);
-
-      axios
-        .put(this.$localhost + "api/post/" + idPost, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "bearer " + token,
-          },
-        })
-        .then((res) => {
-          if (res) {
-            localStorage.setItem("posts", JSON.stringify(posts));
-            this.$router.push("../Home");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
-    },*/
-
     postComm() {
       this.submited = true;
       this.$v.$touch();
@@ -216,7 +167,6 @@ export default {
 
     getAllComments() {
       const token = localStorage.getItem("token");
-      /*const idPost = this.$route.params.id;*/
 
       if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -226,7 +176,7 @@ export default {
       }
 
       axios
-        .get(this.$localhost + "api/comm/" /*+ idPost*/, {
+        .get(this.$localhost + "api/comm/", {
           headers: {
             Authorization: "bearer " + token,
           },
@@ -286,36 +236,32 @@ export default {
 <style scoped>
 .card-product {
   border-radius: 20px 20px;
-  width:70%;
+  width: 70%;
   margin: 25px auto 25px auto;
   box-shadow: 0 5px 15px 0 #14285e96;
   padding: 25px;
 }
 .card-img {
-  object-fit:fill;
+  object-fit: fill;
   max-width: 100%;
   height: auto;
 }
-.post-form{
+.post-form {
   padding: 0 0 25px 0;
 }
 .container {
   width: 40%;
   margin: auto;
 }
-.form-control {
-  width:100%;
-  padding:0;
-}
 ul {
-  padding:0;
+  padding: 0;
 }
 .nav-item {
   text-decoration: none;
   list-style: none;
 }
 .container {
-  padding:15px 0 20px 0;
+  padding: 15px 0 20px 0;
 }
 .form-control {
   width: 100%;
@@ -341,19 +287,36 @@ h1 {
 .namecreat {
   color: #8e1801e9;
 }
+.btn {
+  color: whitesmoke;
+  background-color: #ff5050e5;
+  border: none;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  padding: 3px 10px;
+}
+.idcomm {
+  background-color: #ccacac;
+  width: 100%;
+  margin: auto;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px 0 #926d6d;
+  padding: 15px 0;
+}
 .smallsize {
-  font-size: 14px;
+  font-size: 12px;
   font-style: italic;
   border: none !important;
+}
+.textarea {
+  width:95%;
 }
 .contentcommentaire {
   font-size: 18px;
 }
+
 .error {
   color: #e55252cb;
-}
-button {
-  background-color: transparent;
 }
 
 @media (min-width: 320px) and (max-width: 1024px) {

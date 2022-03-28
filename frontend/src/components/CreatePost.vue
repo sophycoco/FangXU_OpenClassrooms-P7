@@ -116,6 +116,7 @@ export default {
   margin: auto;
   width: 40%;
 }
+
 .error {
   color: #e55252cb;
 }

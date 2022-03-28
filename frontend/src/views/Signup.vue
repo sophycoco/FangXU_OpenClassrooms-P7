@@ -1,33 +1,31 @@
 <template>
   <main id="app">
     <h1>Welcome to Groupomania</h1>
-    <form class="signup">
-      <div class="form">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br>
-        <span class="error" v-if="(!$v.email.required && $v.email.$dirty)">Please provide a valid email address.</span>
+    <form>
+      <div class="signup">
+        <div class="form">
+          <label for="email">Email address</label> <br />
+          <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br />
+          <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid email address.</span>
+        </div>
+        <div class="form">
+          <label for="username">Username</label><br />
+          <input type="text" class="form-control" id="username" v-model="username" name="username" aria-required="true" required /><br />
+          <span class="error" v-if="!$v.username.required && $v.username.$dirty">Please choose your username. </span>
+        </div>
+        <div class="form">
+          <label for="password">Password</label><br />
+          <input type="password" class="form-control" v-model="password" id="password" aria-required="true" required /><br />
+          <span class="error" v-if="!$v.password.required && $v.password.$dirty">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
+          <span class="error" v-if="!$v.password.valid && !$v.password.minLength">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
+        </div>
       </div>
-      <div class="form">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" v-model="username" name="username" aria-required="true" required /><br>
-        <span class="error" v-if="(!$v.username.required && $v.username.$dirty)">Please choose your username. </span>
-      </div>
-      <div class="form">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" v-model="password" id="password" aria-required="true" required /><br>
-        <span class="error" v-if="(!$v.password.required && $v.password.$dirty )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
-        <span class="error" v-if="(!$v.password.valid && !$v.password.minLength )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
-      </div>
-      <button type="submit" class="btn signup" @click="createUser()">
-        Submit
-      </button><br>
+      <button type="submit" class="btn" @click="createUser()">Submit</button><br />
       <span id="notfound" class="error">If you are already a member, please login directly.</span>
     </form>
     <div class="separation"></div>
-    <p class="encouragement">
-      Already a member ? Please login !
-    </p>
-    <router-link class="btn login" to="/"><button>Login</button></router-link>
+    <p class="encouragement">Already a member ? Please login !</p>
+    <router-link class="login" to="/"><button class="btn login">Login</button></router-link>
     <Footer />
   </main>
 </template>
@@ -35,12 +33,7 @@
 <script>
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-} from "vuelidate/lib/validators";
+import { required, email, minLength, maxLength } from "vuelidate/lib/validators";
 
 export default {
   name: "Signup",
@@ -103,8 +96,7 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            document.getElementById("notfound").innerHTML =
-              "Email address or username already used. ";
+            document.getElementById("notfound").innerHTML = "Email address or username already used. ";
           });
       }
     },
@@ -116,7 +108,9 @@ export default {
 #app {
   text-align: center;
 }
-.error {
-  color: #e55252cb;
+
+.signup{
+  width:50%;
+  margin: auto;
 }
 </style>

@@ -3,26 +3,23 @@
     <h1>Welcome to Groupomania</h1>
     <form class="signin">
       <div class="form">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br>
-        <span class="error" v-if="(!$v.email.required && $v.email.$dirty)">Please provide a valid email address.</span>
+        <label for="email">Email address</label> <br />
+        <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br />
+        <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid email address.</span>
       </div>
       <div class="form">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" v-model="password" id="password" aria-required="true" required /><br>
-        <span class="error" v-if="(!$v.password.required && $v.password.$dirty )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
-        <span class="error" v-if="(!$v.password.valid && !$v.password.minLength )">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
+        <label for="password">Password</label><br />
+        <input type="password" class="form-control" v-model="password" id="password" aria-required="true" required /><br />
+        <span class="error" v-if="!$v.password.required && $v.password.$dirty">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
+        <span class="error" v-if="!$v.password.valid && !$v.password.minLength">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
       </div>
-      <button type="submit" class="btn signup" v-on:click="loginUser()">
-        Login
-      </button><br>
+      <button type="submit" class="btn signup" v-on:click="loginUser()">Login</button><br />
       <span id="notfound" class="error"> </span>
     </form>
-    <div class="separation"></div>
-    <p class="encouragement">
-      Not a member yet ? Please signup !
-    </p>
-    <router-link class="btn signup" to="/Signup"><button>Signup</button></router-link>
+    <div class="encourage">
+      <p class="encouragement encourage-signup">Not a member yet ? Please signup !</p>
+      <router-link class="signup" to="/Signup"><button class="btn signup">Signup</button></router-link>
+    </div>
 
     <Footer />
   </main>
@@ -31,12 +28,7 @@
 <script>
 import Footer from "@/components/Footer.vue";
 import axios from "axios";
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-} from "vuelidate/lib/validators";
+import { required, email, minLength, maxLength } from "vuelidate/lib/validators";
 
 export default {
   name: "Login",
@@ -91,12 +83,10 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            document.getElementById("notfound").innerHTML =
-              "User not found. Please check your login informations. ";
+            document.getElementById("notfound").innerHTML = "User not found. Please check your login informations. ";
           });
       } else {
-        document.getElementById("notfound").innerHTML =
-          "User not found. Please check your login informations. ";
+        document.getElementById("notfound").innerHTML = "User not found. Please check your login informations. ";
       }
     },
   },
@@ -107,6 +97,10 @@ export default {
 #app {
   text-align: center;
 }
+h1 {
+  padding-top:30px;
+}
+
 .signin {
   width: 50%;
   margin: 70px auto auto auto;
@@ -114,25 +108,24 @@ export default {
 .signup {
   margin-bottom: 40px;
 }
-.separation {
-  margin-bottom: 50px;
-  padding-bottom: 3em;
-}
-.encouragement {
-  padding: 0 !important;
+.form {
+  margin: 10px 0 20px 0;
 }
 .error {
-  color: #e55252cb;
+  color: #970000;
+  font-size: 20px;
+  font-style:bold;
 }
 @media (max-width: 1024px) {
   .signin {
     width: 100%;
     margin: 0;
   }
-}
-@media (max-width: 1024px) {
   h1 {
     font-size: 20px !important;
+  }
+  .form-control {
+    width:90%;
   }
 }
 </style>

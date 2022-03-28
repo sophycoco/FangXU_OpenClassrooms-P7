@@ -2,9 +2,9 @@
   <div class="Profil">
     <h1>Welcome to Groupomania</h1>
     <Nav />
-    <div class="mx-auto">
+    <div class="">
       <div v-for="(user, idx) in users" :key="idx">
-        <div class="card card-product mx-auto">
+        <div class="card card-product">
           <div class="card-body product-body">
             <h2 class="card-title name">{{ user.username }}</h2>
             <div class="separation"></div>
@@ -32,7 +32,7 @@
                 >
               </div>
             </div>
-            <button class="btn btn-modify" v-if="userId == user.id || isAdmin == 1" @click="updateUser()">Modify account informations</button>
+            <button class="btn btn-modify" v-if="userId == user.id || isAdmin == 1" @click="updateUser()">Modify account informations</button> <br />
             <button class="btn btn-delete" v-if="userId == user.id || isAdmin == 1" @click="deleteuser()">Delete account</button>
           </div>
         </div>
@@ -199,9 +199,10 @@ h1 {
   align-items: center;
   border-radius: 20px 20px;
   width: 60%;
+  margin: auto;
 }
 .name {
-  color: #e55252cb;
+  color: #ff5050e5;
 }
 .form-change {
   justify-content: center;
@@ -221,19 +222,27 @@ h1 {
   color: inherit;
   font-style: bold;
 }
-
+.btn{
+  color: whitesmoke;
+  background-color: #ff5050e5;
+  border: none;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  padding: 3px 10px;
+}
 .userinfo {
   margin-right: 15px;
 }
 .error {
   color: #e55252cb;
 }
-@media (min-width: 320px) and (max-width: 1600px) {
+
+/*@media (min-width: 320px) and (max-width: 1024px) {
   .card-product {
     margin: 80px auto auto auto;
     flex-direction: column;
     border-radius: 20px 20px;
-    width: 80%;
+    width: 100%;
   }
-}
+}*/
 </style>
