@@ -14,13 +14,12 @@
         <span class="error" v-if="!$v.password.valid && !$v.password.minLength">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
       </div>
       <button type="submit" class="btn signup" v-on:click="loginUser()">Login</button><br />
-      <span id="notfound" class="error"> </span>
+      <span id="notfound" class="error" v-if="!$v.email.valid && $v.email.$dirty">Cannot find user. Please check your login informations. </span>
     </form>
     <div class="encourage">
       <p class="encouragement encourage-signup">Not a member yet ? Please signup !</p>
       <router-link class="signup" to="/Signup"><button class="btn signup">Signup</button></router-link>
     </div>
-
     <Footer />
   </main>
 </template>
@@ -79,14 +78,14 @@ export default {
           })
           .then((res) => {
             localStorage.setItem("token", res.data.token);
-            this.$router.push("/Home");
+            this.$router.push('/home');
           })
           .catch((error) => {
             console.log(error);
-            document.getElementById("notfound").innerHTML = "User not found. Please check your login informations. ";
+            document.getElementById("notfound").innerHTML = "Cannot find user. Please check your login informations. ";
           });
       } else {
-        document.getElementById("notfound").innerHTML = "User not found. Please check your login informations. ";
+        document.getElementById("notfound").innerHTML = "Cannot find user. Please check your login informations. ";
       }
     },
   },
@@ -112,7 +111,7 @@ h1 {
   margin: 10px 0 20px 0;
 }
 .error {
-  color: #970000;
+  color: whitesmoke;
   font-size: 20px;
   font-style:bold;
 }

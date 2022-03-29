@@ -115,10 +115,10 @@ ul {
   list-style: none;
 }
 .namecreat {
-  color: whitesmoke;
-  font-style: strong;
+  color: #14285e96;
+  font-style: italic;
 }
-@media (min-width: 320px) and (max-width: 1000px) {
+@media only screen and (max-width: 1024px) {
   .card-product {
     margin: 90px auto auto auto;
     flex-direction: column;

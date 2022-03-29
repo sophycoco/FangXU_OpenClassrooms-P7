@@ -18,7 +18,7 @@
               <div class="form-change">
                 <label for="username">Change my username</label> <br />
                 <input type="username" class="form-control" v-model="username" id="username" required /><br />
-                <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid username.</span>
+                <span class="error" v-if="!$v.username.required && $v.username.$dirty">Please provide a valid username.</span>
               </div>
 
               <div class="form-change">
@@ -134,6 +134,7 @@ export default {
         })
         .then((res) => {
           if (res) {
+            alert("Are you sure to delete your account?");
             localStorage.clear();
             this.$router.push("../Signup");
           }
@@ -174,7 +175,7 @@ export default {
         .then((res) => {
           if (res) {
             localStorage.setItem("users", JSON.stringify(users));
-            this.$router.push("../Home");
+            this.$router.push("../home");
           }
         })
         .catch((error) => {
@@ -184,6 +185,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style scoped>
@@ -237,12 +239,16 @@ h1 {
   color: #e55252cb;
 }
 
-/*@media (min-width: 320px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
   .card-product {
     margin: 80px auto auto auto;
     flex-direction: column;
     border-radius: 20px 20px;
     width: 100%;
   }
-}*/
+  .form {
+  width: 80%;
+  margin: auto;
+}
+}
 </style>

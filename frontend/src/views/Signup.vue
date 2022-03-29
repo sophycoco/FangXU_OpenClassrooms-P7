@@ -24,7 +24,7 @@
       <span id="notfound" class="error">If you are already a member, please login directly.</span>
     </form>
     <div class="separation"></div>
-    <p class="encouragement">Already a member ? Please login !</p>
+    <p class="encouragement">Already a member? Please login!</p>
     <router-link class="login" to="/"><button class="btn login">Login</button></router-link>
     <Footer />
   </main>
@@ -67,9 +67,6 @@ export default {
     },
   },
   methods: {
-    /**
-     * Permet de poster les donnees saisie par utilisateur
-     */
     createUser() {
       this.submited = true;
       this.$v.$touch();
@@ -92,7 +89,10 @@ export default {
           .post(this.$localhost + "api/auth/signup", users)
           .then((res) => {
             console.log(res);
-            this.$router.push("/Login");
+            alert("Your account has been created. Please login. ");
+            /*this.$router.push({ name: 'Login'});*/
+            this.$router.push('../');
+            /*document.getElementById("notfound").innerHTML = "Your account has been created. Please login. ";*/
           })
           .catch((error) => {
             console.log(error);
@@ -112,5 +112,19 @@ export default {
 .signup{
   width:50%;
   margin: auto;
+}
+.error {
+  color: whitesmoke;
+  font-size: 20px;
+  font-style:bold;
+}
+@media (max-width: 1024px) {
+  .signup {
+    width: 100%;
+    margin: auto;
+  }
+ .error {
+   font-size: 16px;
+ }
 }
 </style>

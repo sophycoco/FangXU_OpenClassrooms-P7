@@ -40,7 +40,7 @@
 
                 <div class="card idcomm" :id="comm.id" v-for="(comm, indx) in comms" :key="indx">
                   <div class="">
-                    <div class="user align-items-center">
+                    <div class="user">
                       <span
                         ><small class="font-weight-bold"
                           ><span class="nametitle">{{ comm.username }} </span>
@@ -319,7 +319,7 @@ h1 {
   color: #e55252cb;
 }
 
-@media (min-width: 320px) and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
   .card-product {
     margin: 90px auto auto auto;
     flex-direction: column;
@@ -330,5 +330,9 @@ h1 {
     width: 100%;
     object-fit: contain;
   }
+  .container {
+  width: 80%;
+  margin: auto;
+}
 }
 </style>

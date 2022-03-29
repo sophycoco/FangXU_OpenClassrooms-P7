@@ -72,5 +72,16 @@ ul {
   list-style: none;
   color: #2c3e50;
 }
+@media only screen and (max-width: 1024px) {
+  .navigation {
+  margin:15px 0 35px 0;
+}
+  ul {
+  padding: 0;
+  display: flex;
+  font-size: 13px;
+  justify-content:space-between;
+}
+}
 
 </style>

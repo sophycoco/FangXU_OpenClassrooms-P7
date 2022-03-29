@@ -4,18 +4,18 @@
       <form class="Post" id="formpost" encType="multipart/form-data">
         <div class="form">
           <label for="title">What's on your mind?</label><br />
-          <input type="text" class="form-control" id="title" v-model="title" aria-required="true" required /><br>
-          <span class="error" v-if="(!$v.title.required && $v.title.$dirty)">Please enter a title.</span>
+          <input type="text" class="form-control" id="title" v-model="title" aria-required="true" required /><br />
+          <span class="error" v-if="!$v.title.required && $v.title.$dirty">Please enter a title.</span>
         </div>
         <div class="form">
           <label for="content">Tell us something more!</label><br />
-          <textarea class="form-control textarea " v-model="content" rows="10" id="content" aria-required="true" required></textarea>
+          <textarea class="form-control textarea" v-model="content" rows="10" id="content" aria-required="true" required></textarea>
         </div>
         <div class="form">
           <label class="sr-only" for="image" title="image" role="button">Image</label>
           <input type="file" accept=".png, .jpg, .jpeg, .gif, .webp" v-on:change="onSelect" ref="file" aria-required="true" id="image" />
         </div>
-        <span class="error" v-if="(!$v.content.required && $v.content.$dirty)">Please add an article and an image. </span><br><br>
+        <span class="error" v-if="!$v.content.required && $v.content.$dirty">Please add an article and an image. </span><br /><br />
         <span id="notfound" class="error"> </span>
         <button type="submit" class="btn submit" @click="postform()">Submit</button>
       </form>
@@ -88,8 +88,7 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            document.getElementById("notfound").innerHTML =
-              "An error has occured, please try later.";
+            document.getElementById("notfound").innerHTML = "An error has occured, please try later.";
           });
       }
     },
@@ -99,7 +98,7 @@ export default {
 
 <style scoped>
 .form {
-  margin: 15px
+  margin: 15px;
 }
 .form-control {
   width: 100%;
@@ -119,5 +118,22 @@ export default {
 
 .error {
   color: #e55252cb;
+}
+@media (max-width: 1024px) {
+  .card-product {
+    margin: 90px auto auto auto;
+    flex-direction: column;
+    border-radius: 20px 20px;
+    width: 80%;
+  }
+  .card-img {
+    width: 100%;
+    object-fit: contain;
+  }
+  #formpost {
+    text-align: center;
+    margin: auto;
+    width: 80%;
+  }
 }
 </style>

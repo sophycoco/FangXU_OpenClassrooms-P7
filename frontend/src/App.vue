@@ -104,9 +104,9 @@ export default {
   font-size: 24px;
   color: #e55252cb;
 }
-@media (min-width: 1024px) {
+@media only screen and (max-width: 1024px) {
   .logo {
-    width: 30%;
+    width: 70%;
   }
 }
 </style>
