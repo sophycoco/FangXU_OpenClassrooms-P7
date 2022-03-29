@@ -1,7 +1,7 @@
 <template>
   <main id="app">
     <h1>Welcome to Groupomania</h1>
-    <form>
+    <form v-on:submit.prevent="onSubmit">
       <div class="signup">
         <div class="form">
           <label for="email">Email address</label> <br />
@@ -85,13 +85,15 @@ export default {
             userVerification: false,
           };
         } // to send information to create an account
+        console.log(this.$router);
         axios
           .post(this.$localhost + "api/auth/signup", users)
-          .then((res) => {
-            console.log(res);
-            alert("Your account has been created. Please login. ");
-            /*this.$router.push({ name: 'Login'});*/
-            this.$router.push('../');
+          .then(() => {
+            console.log(this.$router);/*
+            alert("Your account has been created. Please login. ");*/
+            this.$router.push({ path: '/'});
+            /*this.$router.push('/Login');*/
+
             /*document.getElementById("notfound").innerHTML = "Your account has been created. Please login. ";*/
           })
           .catch((error) => {
