@@ -1,10 +1,6 @@
 <template>
   <div class="navigation">
     <nav class="navbar">
-      <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-       <img src="../assets/icon.png" alt="groupomania logo" /> -->
       <div class="navbar-collapse">
         <ul>
           <li class="nav-item">

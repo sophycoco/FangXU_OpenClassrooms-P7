@@ -9,21 +9,6 @@ const commRoutes = require("./routes/comment");
 const { join } = require("path");
 
 const app = express();
-/*
-mongoose
-  .connect(
-    "mongodb+srv://"+process.env.ID+":"+process.env.PASSWORD+"@cluster0.7hmxr.mongodb.net/"+
-  process.env.DATABASE+"?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !")); 
-
-// connection to database MySql
-const db = require("./models");
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});*/
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

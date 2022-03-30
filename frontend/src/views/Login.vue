@@ -4,7 +4,7 @@
     <form class="signin">
       <div class="form">
         <label for="email">Email address</label> <br />
-        <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br />
+        <input type="email" class="form-control" v-model="email" id="email" aria-required="true" placeholder="example@groupomania.com" required /><br />
         <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid email address.</span>
       </div>
       <div class="form">
@@ -99,7 +99,9 @@ export default {
 h1 {
   padding-top:30px;
 }
-
+::placeholder {
+  color:rgba(245, 245, 245, 0.623);
+}
 .signin {
   width: 50%;
   margin: 70px auto auto auto;

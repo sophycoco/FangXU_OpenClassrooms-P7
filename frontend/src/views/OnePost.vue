@@ -38,25 +38,24 @@
                 </div>
                 <span class="error" v-if="!$v.comment.required && $v.comment.$dirty"> Your comment could not be empty. </span>
 
-                <div class="card idcomm" :id="comm.id" v-for="(comm, indx) in comms" :key="indx">
-                  <div class="">
+                <div class="card idcomm comm" :id="comm.id" v-for="(comm, indx) in comms" :key="indx">
+                  <div class="comm-info">
                     <div class="user">
-                      <span
-                        ><small class="font-weight-bold"
-                          ><span class="nametitle">{{ comm.username }} </span>
-                          Commented
-                        </small></span
-                      >
+                      <span class="nametitle">{{ comm.username }}</span><br />
+                      <span > <small class="font-weight-bold">
+                          Commented on
+                        </small></span>
+                          <span><small class=""> {{ datePost(comm.dateCreate) }} </small></span>
                     </div>
                   </div>
-                  <div class="contentcommentaire">
+                  <div class="comm-content">
                     <div class="user align-items-center">
                       <span
                         ><small class="font-weight-bold">{{ comm.content }}</small></span
                       >
                     </div>
                   </div>
-                  <div class="">
+                  <div class="comm-delete">
                     <button class="btn reply smallsize" type="submit" v-if="userId == comm.user_id || isAdmin == 1" @click="deletecomm()">Delete</button>
                   </div>
                 </div>
@@ -167,6 +166,7 @@ export default {
 
     getAllComments() {
       const token = localStorage.getItem("token");
+      const idPost = this.$route.params.id;
 
       if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -176,7 +176,7 @@ export default {
       }
 
       axios
-        .get(this.$localhost + "api/comm/", {
+        .get(this.$localhost + "api/comm/" + idPost, {
           headers: {
             Authorization: "bearer " + token,
           },
@@ -267,7 +267,6 @@ ul {
   width: 100%;
   background-color: #14285e96;
   font-family: inherit;
-  padding: 10px;
   border: 2px solid var(--input-border);
   border-radius: 4px;
   color: antiquewhite;
@@ -309,9 +308,9 @@ h1 {
   border: none !important;
 }
 .textarea {
-  width:95%;
+  width: 95%;
 }
-.contentcommentaire {
+.comm-content {
   font-size: 18px;
 }
 
@@ -331,8 +330,8 @@ h1 {
     object-fit: contain;
   }
   .container {
-  width: 80%;
-  margin: auto;
-}
+    width: 80%;
+    margin: auto;
+  }
 }
 </style>

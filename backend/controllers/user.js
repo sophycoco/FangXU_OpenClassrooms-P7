@@ -1,10 +1,12 @@
 const bcrypt = require("bcrypt");
+const crypt = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const conn = require("../connection");
 
 // to create a new user
 exports.signup = (req, res, next) => {
+  /*const cryptoEmail = crypt.MD5(req.body.email).toString();*/
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
@@ -13,13 +15,7 @@ exports.signup = (req, res, next) => {
         email: req.body.email,
         password: hash,
         isAdmin: 0,
-        /*imageUrl: req.body.image, */
       });
-      /*user
-        .create(user)
-        .save()
-        .then(() => res.status(201).json({ message: "Your account has been created " }))
-        .catch((error) => res.status(400).json({ error }));*/
       conn.query("INSERT INTO user SET ?", user, (err, result, field) => {
         if (err) {
           console.log(err);
@@ -33,7 +29,7 @@ exports.signup = (req, res, next) => {
 
 // to login with email and password
 exports.login = async (req, res, next) => {
-  console.table([req.body.email, req.body.password]);
+  /*const cryptoEmail = crypt.MD5(req.body.email).toString();*/
   if (req.body.email && req.body.password) {
     conn.query("SELECT * FROM user WHERE email= ?", req.body.email, (error, results, fields) => {
       if (results.length > 0) {
@@ -100,6 +96,7 @@ exports.getOneUser = (req, res, next) => {
 
 // to modify informations of a user
 exports.modifyUser = (req, res, next) => {
+  /*const cryptoEmail = crypt.MD5(req.body.email).toString();*/
   const email = req.body.email;
   const id = req.params.id;
   let password = req.body.password;

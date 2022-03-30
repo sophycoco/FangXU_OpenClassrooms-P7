@@ -1,11 +1,11 @@
 <template>
   <main id="app">
     <h1>Welcome to Groupomania</h1>
-    <form v-on:submit.prevent="onSubmit">
+    <form v-on:submit.prevent="createUser">
       <div class="signup">
         <div class="form">
           <label for="email">Email address</label> <br />
-          <input type="email" class="form-control" v-model="email" id="email" aria-required="true" required /><br />
+          <input type="email" class="form-control" v-model="email" id="email" placeholder="example@groupomania.com" aria-required="true" required /><br />
           <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid email address.</span>
         </div>
         <div class="form">
@@ -40,7 +40,7 @@ export default {
   components: {
     Footer,
   },
-  data() {
+  data() { 
     return {
       email: "",
       username: "",
@@ -85,16 +85,11 @@ export default {
             userVerification: false,
           };
         } // to send information to create an account
-        console.log(this.$router);
         axios
           .post(this.$localhost + "api/auth/signup", users)
           .then(() => {
-            console.log(this.$router);/*
-            alert("Your account has been created. Please login. ");*/
+            alert("Your account has been created. Please login. ");
             this.$router.push({ path: '/'});
-            /*this.$router.push('/Login');*/
-
-            /*document.getElementById("notfound").innerHTML = "Your account has been created. Please login. ";*/
           })
           .catch((error) => {
             console.log(error);
@@ -110,7 +105,9 @@ export default {
 #app {
   text-align: center;
 }
-
+::placeholder {
+  color:rgba(245, 245, 245, 0.623);
+}
 .signup{
   width:50%;
   margin: auto;

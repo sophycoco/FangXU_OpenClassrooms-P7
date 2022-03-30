@@ -10,15 +10,15 @@
             <div class="separation"></div>
             <div class="form">
               <div class="form-change">
-                <label for="email">Change my email address</label> <br />
-                <input type="email" class="form-control" v-model="email" id="email" required /><br />
-                <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid email address.</span>
-              </div>
-
-              <div class="form-change">
                 <label for="username">Change my username</label> <br />
                 <input type="username" class="form-control" v-model="username" id="username" required /><br />
                 <span class="error" v-if="!$v.username.required && $v.username.$dirty">Please provide a valid username.</span>
+              </div>
+              <h2 class="name">{{ user.email }}</h2>
+              <div class="form-change">
+                <label for="email">Change my email address</label> <br />
+                <input type="email" class="form-control" v-model="email" id="email" required /><br />
+                <span class="error" v-if="!$v.email.required && $v.email.$dirty">Please provide a valid email address.</span>
               </div>
 
               <div class="form-change">
@@ -32,8 +32,10 @@
                 >
               </div>
             </div>
-            <button class="btn btn-modify" v-if="userId == user.id || isAdmin == 1" @click="updateUser()">Modify account informations</button> <br />
-            <button class="btn btn-delete" v-if="userId == user.id || isAdmin == 1" @click="deleteuser()">Delete account</button>
+            <div class="form-change btn-modify">
+              <button class="btn btn-modify" v-if="userId == user.id || isAdmin == 1" @click="updateUser()">Modify account informations</button> <br />
+              <button class="btn btn-delete" v-if="userId == user.id || isAdmin == 1" @click="deleteuser()">Delete account</button>
+            </div>
           </div>
         </div>
 
@@ -100,14 +102,12 @@ export default {
       const iduser = this.$route.params.id;
       console.log("getOneUser");
       console.log("iduser" + iduser);
-
       if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       } else {
         axios.defaults.headers.common["Authorization"] = null;
         this.$router.push("/");
       }
-
       axios
         .get(this.$localhost + "api/auth/" + iduser, {
           headers: {
@@ -121,6 +121,7 @@ export default {
           console.log("cannot get informations of the user " + error);
         });
     },
+
     deleteuser() {
       const token = localStorage.getItem("token");
       const iduser = this.$route.params.id;
@@ -134,7 +135,7 @@ export default {
         })
         .then((res) => {
           if (res) {
-            alert("Are you sure to delete your account?");
+            alert("Your account has been deleted. ");
             localStorage.clear();
             this.$router.push("../Signup");
           }
@@ -143,6 +144,7 @@ export default {
           console.log(error);
         });
     },
+
     updateUser() {
       this.submited = true;
       console.log("submited");
@@ -185,7 +187,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
@@ -224,13 +225,14 @@ h1 {
   color: inherit;
   font-style: bold;
 }
-.btn{
+.btn {
   color: whitesmoke;
   background-color: #ff5050e5;
   border: none;
   border: 2px solid var(--input-border);
   border-radius: 4px;
   padding: 3px 10px;
+  margin: 10px;
 }
 .userinfo {
   margin-right: 15px;
@@ -247,8 +249,11 @@ h1 {
     width: 100%;
   }
   .form {
-  width: 80%;
-  margin: auto;
-}
+    width: 80%;
+    margin: auto;
+  }
+  h2 {
+    font-size: 16px;
+  }
 }
 </style>

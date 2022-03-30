@@ -7,7 +7,7 @@ const commCtrl = require('../controllers/comment');
 
 router.post('/', auth, commCtrl.createComment);
 router.delete('/:id', auth, authComm, commCtrl.deleteComment);
-router.get('/', auth, commCtrl.getAllComm);
-router.get('/:id', auth, commCtrl.getOneComm);
+router.get('/:id', auth, commCtrl.getAllComm);
+router.get('/getOneComm/:id', auth, commCtrl.getOneComm);
 
 module.exports = router;
