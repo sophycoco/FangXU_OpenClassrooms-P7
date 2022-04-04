@@ -3,20 +3,22 @@
     <Nav />
     <div>
       <h2>Modify your article</h2>
+      
       <div v-for="(art, idx) in arts" :key="idx">
         <div class="post-form">
-          <h2 class="card-title" id="title">{{ art.title }}</h2>
+          <h2 class="card-title" id="title-post">{{ art.title }}</h2>
           <div class="separation"></div>
-          <p class="card-text price" id="content">{{ art.content }}</p>
+          <p class="card-text price" id="content-post">{{ art.content }}</p>
           <div>
-            <img class="card-img" id="image" alt="imagespost" :src="art.image" v-if="art.image != 0" />
+            <img class="card-img" id="image-post" alt="images" :src="art.image" v-if="art.image != 0" />
             <img class="card-img" :src="art.image" v-else-if="imgoff" />
           </div>
         </div>
-      </div>
+      </div> 
+
       <form class="Post" id="formpost" encType="multipart/form-data">
         <div class="form-group">
-          <label for="title">Modify your title:</label> <br />
+          <label for="title">Modify your title: </label> <br />
           <input type="text" class="form-control" v-model="title" id="title" aria-required="true" required />
           <span class="error" v-if="!$v.title.required && $v.title.$dirty">Please input the title of your article. </span>
         </div>
@@ -34,6 +36,7 @@
           <button type="submit" class="btn signup" @click="deleteForm()">Delete</button>
         </div>
       </form>
+      
 
       <Footer />
     </div>
@@ -104,6 +107,7 @@ export default {
           console.log("Le post n'a pas pu être récupéré /" + error);
         });
     },
+
     onSelect() {
       this.file = this.$refs.file.files[0];
       console.log(this.file);

@@ -6,13 +6,13 @@ const conn = require("../connection");
 
 // to create a new user
 exports.signup = (req, res, next) => {
-  /*const cryptoEmail = crypt.MD5(req.body.email).toString();*/
+  const cryptoEmail = crypt.MD5(req.body.email).toString();
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
       const user = new User({
         username: req.body.username,
-        email: req.body.email,
+        email: cryptoEmail,
         password: hash,
         isAdmin: 0,
       });
@@ -29,26 +29,20 @@ exports.signup = (req, res, next) => {
 
 // to login with email and password
 exports.login = async (req, res, next) => {
-  /*const cryptoEmail = crypt.MD5(req.body.email).toString();*/
+  const cryptoEmail = crypt.MD5(req.body.email).toString();
   if (req.body.email && req.body.password) {
-    conn.query("SELECT * FROM user WHERE email= ?", req.body.email, (error, results, fields) => {
+    conn.query("SELECT * FROM user WHERE email= ?", cryptoEmail, (error, results, fields) => {
       if (results.length > 0) {
         bcrypt.compare(req.body.password, results[0].password).then((valid) => {
           if (!valid) {
             res.status(401).json({ message: "Password incorrect" });
           } else {
             //confirmation User connecté
-            console.log(req.body.email, "is connected. ");
+            console.log(cryptoEmail, "is connected. ");
             console.log(results);
-            //admin or not
-            /* if (results[0].isAdmin === 1) {
-                              status = 'administrater';
-                          } else {
-                              status = 'member';
-                          } */
             res.status(200).json({
               userId: results[0].id,
-              email: req.body.email,
+              email: cryptoEmail,
               username: req.body.username,
               isAdmin: results[0].isAdmin,
               token: jwt.sign({ userId: results[0].id, username: results[0].username, isAdmin: results[0].isAdmin }, process.env.TK_CHAIN, { expiresIn: "24h" }),
@@ -96,8 +90,8 @@ exports.getOneUser = (req, res, next) => {
 
 // to modify informations of a user
 exports.modifyUser = (req, res, next) => {
-  /*const cryptoEmail = crypt.MD5(req.body.email).toString();*/
-  const email = req.body.email;
+  const cryptoEmail = crypt.MD5(req.body.email).toString();
+  const email = cryptoEmail;
   const id = req.params.id;
   let password = req.body.password;
   let username = req.body.username;

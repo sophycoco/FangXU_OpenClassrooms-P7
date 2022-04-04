@@ -14,7 +14,7 @@
                 <input type="username" class="form-control" v-model="username" id="username" required /><br />
                 <span class="error" v-if="!$v.username.required && $v.username.$dirty">Please provide a valid username.</span>
               </div>
-              <h2 class="name">{{ user.email }}</h2>
+              <!-- <h2 class="name">{{ user.email }}</h2> -->
               <div class="form-change">
                 <label for="email">Change my email address</label> <br />
                 <input type="email" class="form-control" v-model="email" id="email" required /><br />
