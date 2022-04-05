@@ -49,9 +49,6 @@ exports.login = async (req, res, next) => {
             });
           }
         });
-        /* } else {
-              res.status(401).json({ message: 'User or password does not exist.' });
-          }*/
       }
     });
   } else {

@@ -1,7 +1,7 @@
 <template>
   <main id="app">
     <h1>Welcome to Groupomania</h1>
-    <form v-on:submit.prevent="createUser">
+    <form @submit.prevent="createUser">
       <div class="signup">
         <div class="form">
           <label for="email">Email address</label> <br />
@@ -20,7 +20,7 @@
           <span class="error" v-if="!$v.password.valid && !$v.password.minLength">Please choose a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and no spaces.</span>
         </div>
       </div>
-      <button type="submit" class="btn" @click="createUser()">Submit</button><br />
+      <button type="submit" class="btn">Submit</button><br />
       <span id="notfound" class="error">If you are already a member, please login directly.</span>
     </form>
     <div class="separation"></div>
@@ -32,7 +32,7 @@
 
 <script>
 import Footer from "@/components/Footer.vue";
-import axios from "axios";
+import axios from "axios"; 
 import { required, email, minLength, maxLength } from "vuelidate/lib/validators";
 
 export default {
@@ -84,18 +84,18 @@ export default {
           users = {
             userVerification: false,
           };
-        } // to send information to create an account
+        } // to send information to create an account       
         axios
           .post(this.$localhost + "api/auth/signup", users)
           .then(() => {
             alert("Your account has been created. Please login. ");
             this.$router.push({ path: '/'});
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(() => {
+           // console.log(error);
             document.getElementById("notfound").innerHTML = "Email address or username already used. ";
           });
-      }
+      } 
     },
   },
 };
