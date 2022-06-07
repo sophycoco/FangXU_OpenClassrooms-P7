@@ -1,4 +1,4 @@
-# OpenClassrooms Web Developer Project 7 -- Construition d'un réseau social pour une entrprise. 
+# OpenClassrooms Web Developer Project 7 -- Construire un réseau social pour une entrprise. 
 
 -Client
 Groupomania, un groupe spécialisé dans la grande distribution.
